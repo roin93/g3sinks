@@ -70,7 +70,14 @@ INCLUDE (${LogRotate_SOURCE_DIR}/Options.cmake)
  ENDIF()
 
 
-find_library(G3LOG_LIBRARY g3logger PATHS /usr/local/probe/lib )
+IF (NOT G3_LOGGER_NOT_INSTALLED)
+    find_library(G3LOG_LIBRARY g3logger PATHS /usr/local/probe/lib )
+ELSE()
+    IF (NOT G3LOG_LIBRARY)
+        set(G3LOG_LIBRARY g3logger)
+    ENDIF()
+ENDIF()
+
 include_directories(${CMAKE_PREFIX_PATH}/include)
 
 
